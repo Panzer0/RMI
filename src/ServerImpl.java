@@ -1,9 +1,8 @@
-package server;
-
-import com.sun.source.tree.Tree;
-import shared.Server;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
@@ -48,12 +47,16 @@ public class ServerImpl implements Server {
         return top5;
     }
     public static void main(String[] args) throws RemoteException {
-        Server server = new ServerImpl();
-        System.out.println(server.findMostCommon("""
-                Letting the days go by, let the water hold me down
-                Letting the days go by, water flowing underground
-                Into the blue again after the money's gone
-                Once in a lifetime, water flowing underground"""));
+        try{
+            Server server = new ServerImpl();
+            Context context = new InitialContext();
+            Registry reg = LocateRegistry.createRegistry(1099);
+            reg.rebind("server", server);
+            //context.bind("rmi://localhost:1099/server",server);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
