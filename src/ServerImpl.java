@@ -1,5 +1,3 @@
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -49,10 +47,8 @@ public class ServerImpl implements Server {
     public static void main(String[] args) throws RemoteException {
         try{
             Server server = new ServerImpl();
-            Context context = new InitialContext();
             Registry reg = LocateRegistry.createRegistry(1099);
             reg.rebind("server", server);
-            //context.bind("rmi://localhost:1099/server",server);
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -1,13 +1,9 @@
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class Client {
     public static void main(String[] args) {
         try {
-            Context context = new InitialContext();
-            //Server server = (Server)context.lookup("server");
 
             Registry reg = LocateRegistry.getRegistry(1099);
             Server server = (Server)reg.lookup("server");
