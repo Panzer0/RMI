@@ -221,5 +221,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # Program products
-out.jpg
+out*
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,intellij,intellij+iml

@@ -60,8 +60,8 @@ public class ServerImpl implements Server {
     }
 
     @Override
-    public void rotateImage90(String filename) throws IOException {
-        File inFile = new File("dog.jpg");
+    public void rotateImage90(String inName, String outName) throws IOException {
+        File inFile = new File(inName);
         BufferedImage inImage = ImageIO.read(inFile);
         int w = inImage.getWidth();
         int h = inImage.getHeight();
@@ -69,7 +69,7 @@ public class ServerImpl implements Server {
         inImage.getRGB(0, 0, w, h, buff, 0, w);
         BufferedImage outImage = new BufferedImage(h, w,BufferedImage.TYPE_INT_RGB);
         outImage.setRGB(0, 0, h, w, rotateIntArray(buff, h, w), 0, h);
-        File outFile = new File("out.jpg");
+        File outFile = new File(outName);
         ImageIO.write(outImage, "JPG", outFile);
     }
 
