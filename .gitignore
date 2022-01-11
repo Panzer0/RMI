@@ -220,4 +220,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Program products
+out.jpg
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,intellij,intellij+iml

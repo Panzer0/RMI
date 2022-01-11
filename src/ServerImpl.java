@@ -1,3 +1,7 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -44,6 +48,31 @@ public class ServerImpl implements Server {
         }
         return top5;
     }
+
+    private int[] rotateIntArray(int[] array, int h, int w) {
+        int[] out = new int[w*h];
+        for(int y = 0; y < w; y++) {
+            for(int x = 0; x < h; x++) {
+                out[x*h + (w-y-1)] = array[y*w + x];
+            }
+        }
+        return out;
+    }
+
+    @Override
+    public void rotateImage90(String filename) throws IOException {
+        File inFile = new File("dog.jpg");
+        BufferedImage inImage = ImageIO.read(inFile);
+        int w = inImage.getWidth();
+        int h = inImage.getHeight();
+        int[] buff = new int[w*h];
+        inImage.getRGB(0, 0, w, h, buff, 0, w);
+        BufferedImage outImage = new BufferedImage(h, w,BufferedImage.TYPE_INT_RGB);
+        outImage.setRGB(0, 0, h, w, rotateIntArray(buff, h, w), 0, h);
+        File outFile = new File("out.jpg");
+        ImageIO.write(outImage, "JPG", outFile);
+    }
+
     public static void main(String[] args) throws RemoteException {
         try{
             Server server = new ServerImpl();
