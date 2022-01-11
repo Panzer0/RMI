@@ -1,6 +1,6 @@
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
+package Client;
+
+import Server.Server;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
